@@ -1,0 +1,55 @@
+mat-list {
+  margin-top: 2px;
+  padding-top: 20px;
+  font-size: 1.3em;
+}
+
+a {
+  text-decoration: none;
+}
+
+.title {
+  font-size: 1.5em;
+
+}
+
+.bi {
+  font-size: 1.2em;
+  color: var(--cor2);
+  cursor: pointer;
+  padding: 20px;
+}
+
+.bi:hover {
+  color: rgb(75, 75, 255);
+}
+
+
+.button-add {
+  display: flex;
+  justify-content: end;
+}
+
+mat-form-field {
+  padding-top: 50px;
+  margin-right: 20px;
+
+}
+
+.searcFrom {
+  max-width: 1000px;
+}
+
+button {
+  margin: 5px;
+}
+
+.resultado {
+  max-width: 500px;
+  padding-left:15px ;
+  opacity: 1;
+}
+
+.resultado p {
+  padding-top: 5px;
+}

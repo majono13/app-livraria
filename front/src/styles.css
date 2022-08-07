@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;1,100&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap');
+
+@import url('bootstrap-grid.min.css');
+
+*{
+  margin: 0;
+  padding: 0;
+  font-family: var(--font);
+}
+
+body {
+  background-color: var(--cor3);
+}
+
+
+:root {
+  --cor2: #3C3D32;
+  --cor: rgb(235, 235, 235);
+  --cor3: rgb(243, 243, 243);
+
+  --font: 'Montserrat', sans-serif;
+  --font-logo: 'Caveat Brush', cursive;
+}
+
+.container {
+ margin:0;
+  padding: 0;
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  margin-top: 20%;
+ }
+
+
+
+
+

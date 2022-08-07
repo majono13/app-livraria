@@ -1,0 +1,63 @@
+
+<!--Campo pesquisa-->
+<form class="searcFrom">
+  <div>
+    <mat-form-field appearance="outline" style="
+    width: 500px">
+      <mat-label>Pesquisar nome do produto</mat-label>
+      <input matInput placeholder="Faça sua pesquisa..." autocomplete="off" [(ngModel)]="pesquisa" name="pesquisa">
+    </mat-form-field>
+    <button mat-flat-button color="primary" (click)="pesquisar()">Pesquisar</button>
+    <button mat-flat-button color="warn" (click)="cancelarPesquisa()">Cancelar</button>
+  </div>
+
+  <div *ngIf="resultado.length > 0"  class="resultado">
+    <mat-list *ngFor="let livro of resultado; let i = index" role="list">
+
+      <mat-list-item *ngIf="resultado.length == 0" role="listitem">Produto não encontrado</mat-list-item>
+
+      <mat-list-item role="listitem">
+        {{livro.nome}}
+        <div><i class="bi bi-info-circle" (click)="openDialogDetails(i)" title="Ver detalhes"></i></div>
+      <div><i class="bi bi-pencil" (click)="openDialogEdit(i)" title="Editar"></i></div>
+      <div><i (click)="apagar(livro, i)" class="bi bi-trash3-fill" title="Excluir"></i></div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </mat-list>
+
+  </div>
+</form>
+
+<!--Campo adicionar produto-->
+<div class="button-add">
+  <button routerLink="/novo_produto" mat-fab color="primary" aria-label="Example icon button with a delete icon">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
+
+<!--Campo Produtos-->
+<div class="produtos">
+
+  <div *ngIf="load" class="spinner">
+    <mat-spinner ></mat-spinner>
+  </div>
+
+  <mat-list *ngIf="!load">
+    <div class="title" mat-subheader>Produtos</div>
+
+    <a
+    mat-list-item *ngFor="let livro of livros, let i=index">
+      <div mat-line>{{livro.nome}}</div>
+      <div mat-line>{{livro.autor}}</div>
+      <div><i class="bi bi-info-circle" (click)="openDialogDetails(i)" title="Ver detalhes"></i></div>
+      <div><i class="bi bi-pencil" (click)="openDialogEdit(i)" title="Editar"></i></div>
+      <div><i (click)="apagar(livro, i)" class="bi bi-trash3-fill" title="Excluir"></i></div>
+
+      <mat-divider></mat-divider>
+    </a>
+  </mat-list>
+
+
+  </div>
+

@@ -1,0 +1,31 @@
+mat-list div {
+  font-size: 3em;
+}
+
+mat-list-item{
+  cursor: pointer;
+}
+
+mat-list-item:hover {
+ text-decoration: underline;
+}
+
+.mat-list-item {
+  font-size: 1.3em;
+}
+
+.linkAtivo {
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.205);
+}
+
+.menu {
+  margin-top: 2px;
+  background-color: var(--cor);
+  height: 100%;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.219);
+}
+
+nav {
+  height: 100vh;
+}
+
