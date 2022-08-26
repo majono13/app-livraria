@@ -1,8 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { Subject, takeUntil, Observable } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 
-import { LivrosService } from '../../shared/livros.service';
+import { LivrosService } from './livros.service';
 import { Livro } from '../../shared/models/livros.models';
 import { DetalhesComponent } from './detalhes/detalhes.component';
 import { EditeComponent } from './edite/edite.component'
@@ -18,6 +18,7 @@ export class ProdutosComponent implements OnInit {
 
   livros: Livro[] = []
   load: boolean = true
+  pesquisando: boolean = false
   livroEdit!: Livro
   resultado: Livro[] = []
   pesquisa: string = ''
@@ -33,6 +34,7 @@ export class ProdutosComponent implements OnInit {
   }
 
   listar() {
+    this.pesquisando = false
     this.livrosService.get()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((livro) => {
@@ -41,40 +43,71 @@ export class ProdutosComponent implements OnInit {
       })
   }
 
-  apagar(livro: Livro, i: number) {
-    this.livrosService.delete(livro)
-      .subscribe((e) => {
-        this.livros.splice(i, 1);
-        this.livrosService.notificacao('Produto Excluído')
-      })
+  apagar(livro: Livro) {
+
+    for (let i in this.livros) {
+
+      if (this.livros[i]._id === livro._id) {
+        this.livrosService.delete(livro)
+          .subscribe((e) => {
+            this.livros.splice(Number(i), 1);
+            this.livrosService.notificacao('Produto Excluído')
+          })
+      }
+    }
+
   }
 
-  editar(livro: Livro) {
-    alert('oi')
+  openDialogDetails(livro: Livro) {
+
+    for (let i in this.livros) {
+      if (this.livros[i]._id === livro._id) {
+        this.dialog.open(DetalhesComponent, {
+          data: this.livros[i],
+        });
+      }
+    }
+
   }
 
-  openDialogDetails(i: number) {
-    this.dialog.open(DetalhesComponent, {
-      data: this.livros[i],
+  openDialogEdit(livro: Livro) {
 
-    });
-  }
+    for (let i in this.livros) {
 
-  openDialogEdit(i: number) {
-    this.dialog.open(EditeComponent, {
-      data: this.livros[i],
-    }).afterClosed().subscribe(ret => {
-      this.listar();
-    })
+      if (this.livros[i]._id === livro._id) {
+        this.dialog.open(EditeComponent, {
+          data: this.livros[i],
+        }).afterClosed().subscribe(ret => {
+          this.listar();
+        })
+      }
+
+    }
   }
 
   pesquisar() {
-    this.resultado = this.livros.filter((resultado) => {
-      return resultado.nome.toUpperCase() == this.pesquisa.toUpperCase()
-    })
+    if (this.pesquisa.length >= 3) {
+      this.resultado = []
+      this.pesquisando = true
+
+      for (let i in this.livros) {
+
+        if
+          (this.livros[i].nome.toUpperCase() == this.pesquisa.toUpperCase() ||
+          this.livros[i].autor.toUpperCase() == this.pesquisa.toUpperCase() ||
+          this.livros[i].categoria.toUpperCase() == this.pesquisa.toUpperCase()) {
+
+          this.resultado.push(this.livros[i])
+        }
+      }
+      this.pesquisa = ''
+    }
   }
 
+
+
   cancelarPesquisa() {
+    this.pesquisando = false
     this.resultado = [];
     this.pesquisa = '';
   }

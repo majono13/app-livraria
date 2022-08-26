@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Livro } from './models/livros.models';
+import { Livro } from '../../shared/models/livros.models';
 import { Observable } from 'rxjs';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -12,7 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class LivrosService {
 
   private readonly url: string = 'http://localhost:3000'
-  categorias: string[] = [
+  readonly categorias: string[] = [
     'Terror', 'Ação', 'Comédia', 'Didático', 'Autoconhecimento', 'Fantasia', 'Romance', 'Infantil', 'Fábulas', 'Contos', 'Drama', 'Clássicos'
   ]
 

@@ -12,7 +12,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
-
+import { MatRadioModule } from '@angular/material/radio'
+import { MatMenuModule } from '@angular/material/menu';
 
 
 
@@ -31,6 +32,8 @@ import { MatCardModule } from '@angular/material/card';
     MatDialogModule,
     MatSelectModule,
     MatCardModule,
+    MatRadioModule,
+    MatMenuModule,
   ],
   declarations: [
   ]

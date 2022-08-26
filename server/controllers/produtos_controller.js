@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const Livros = require('./livro.model')
+const Livros = require('../models/livro.model')
 
 
 router.get('/', (req, res) => {

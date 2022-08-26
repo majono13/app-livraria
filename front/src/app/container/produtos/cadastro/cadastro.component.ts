@@ -3,7 +3,7 @@ import { FormBuilder, NgForm, Validators } from '@angular/forms';
 
 import { Subject } from 'rxjs';
 
-import { LivrosService } from 'src/app/shared/livros.service';
+import { LivrosService } from 'src/app/container/produtos/livros.service';
 import { Livro } from 'src/app/shared/models/livros.models';
 
 

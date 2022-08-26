@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { ReactiveFormsModule } from '@angular/forms';
@@ -12,18 +12,21 @@ import { MenuComponent } from './shared/componentes/menu/menu.component';
 import { ContainerComponent } from './container/container.component';
 import { ProdutosComponent } from './container/produtos/produtos.component';
 import { FooterComponent } from './shared/componentes/footer/footer.component';
-
-//MATERIAL
-import { MaterialModule } from './shared/material.module';
-/////
-
 import { Ng2SearchPipeModule } from "ng2-search-filter";
 import { CadastroComponent } from './container/produtos/cadastro/cadastro.component';
 import { DetalhesComponent } from './container/produtos/detalhes/detalhes.component';
 import { EditeComponent } from './container/produtos/edite/edite.component';
 import { ClientesComponent } from './container/clientes/clientes.component';
-import { ColaboradoresComponent } from './container/colaboradores/colaboradores.component';
-import { HomeComponent } from './container/home/home.component'
+import { EditeClienteComponent } from './container/clientes/edite/edite.component';
+import { HomeComponent } from './container/home/home.component';
+import { DetalhesClienteComponent } from './container/clientes/detalhes-cliente/detalhes-cliente.component';
+import { CadastroClienteComponent } from './container/clientes/cadastro-cliente/cadastro-cliente.component';
+import { AutenticacaoModule } from './autenticacao/autenticacao.module'
+
+//MATERIAL
+import { MaterialModule } from './shared/material.module';
+import { AutInterceptor } from './autenticacao/aut.inteceptor';
+/////
 
 @NgModule({
   declarations: [
@@ -37,8 +40,10 @@ import { HomeComponent } from './container/home/home.component'
     EditeComponent,
     FooterComponent,
     ClientesComponent,
-    ColaboradoresComponent,
     HomeComponent,
+    EditeClienteComponent,
+    DetalhesClienteComponent,
+    CadastroClienteComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,10 +53,13 @@ import { HomeComponent } from './container/home/home.component'
     HttpClientModule,
     FormsModule,
     Ng2SearchPipeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AutenticacaoModule.forRoot()
 
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AutInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

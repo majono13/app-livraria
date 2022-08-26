@@ -1,11 +1,10 @@
-import { Component, OnInit, Inject, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, NgForm } from '@angular/forms';
 
-import { LivrosService } from 'src/app/shared/livros.service';
+import { LivrosService } from 'src/app/container/produtos/livros.service';
 import { Livro } from 'src/app/shared/models/livros.models';
 
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ThisReceiver } from '@angular/compiler';
 
 
 
@@ -28,7 +27,7 @@ export class EditeComponent implements OnInit {
   livroEditado!: Livro
 
   @ViewChild('form') form!: NgForm
-  @Output() salve = new EventEmitter<any>()
+
 
   categorias: string[] = this.livrosService.categorias
 
@@ -58,7 +57,6 @@ export class EditeComponent implements OnInit {
         (err) => { console.log(err) }
       )
 
-    this.salve.emit()
 
     this.cancelar()
   }
